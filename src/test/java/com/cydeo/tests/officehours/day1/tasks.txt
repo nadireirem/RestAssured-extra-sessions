@@ -1,0 +1,65 @@
+API Documentation: https://jsonplaceholder.typicode.com (scroll down to Routes section)
+
+Q1:
+- Given accept type is Json
+- When user sends request to https://jsonplaceholder.typicode.com/posts
+
+-Then print response body
+
+- And status code is 200
+- And Content - Type is Json
+
+Q2:
+- Given accept type is Json
+- Path param "id" value is 1
+- When user sends request to  https://jsonplaceholder.typicode.com/posts/{id}
+- Then status code is 200
+
+-And json body contains "repellat provident"
+- And header Content - Type is Json
+- And header "X-Powered-By" value is "Express"
+- And header "X-Ratelimit-Limit" value is 1000
+- And header "Age" value is more than 100
+
+- And header "NEL" value contains "success_fraction"
+
+Q3:
+
+- Given accept type is Json
+- Path param "id" value is 12345
+- When user sends request to  https://jsonplaceholder.typicode.com/posts/{id}
+- Then status code is 404
+- And json body contains "{}"
+
+
+Q4:
+- Given accept type is Json
+- Path param "id" value is 2
+- When user sends request to  https://jsonplaceholder.typicode.com/posts/{id}/comments
+- Then status code is 200
+
+- And header Content - Type is Json
+- And json body contains "Presley.Mueller@myrl.com",  "Dallas@ole.me" , "Mallory_Kunze@marie.org"
+
+Q5:
+
+- Given accept type is Json
+- Query Param "postId" value is 1
+- When user sends request to  https://jsonplaceholder.typicode.com/comments
+- Then status code is 200
+
+- And header Content - Type is Json
+
+- And header "Connection" value is "keep-alive"
+- And json body contains "Lew@alysha.tv"
+
+Q6:
+
+- Given accept type is Json
+- Query Param "postId" value is 333
+- When user sends request to  https://jsonplaceholder.typicode.com/comments
+
+- And header Content - Type is Json
+
+- And header "Content-Length" value is 2
+- And json body contains "[]"
