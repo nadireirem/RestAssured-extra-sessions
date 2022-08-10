@@ -8,6 +8,8 @@ import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -131,6 +133,8 @@ public class APITask1 extends TypiCodeTestBase {
         String email = response.path("[0].email");
         System.out.println(email);
 
+        List<String> email1 = response.path("email");
+
         //Dallas
         email = response.path("[1].email");
         System.out.println(email);
@@ -150,6 +154,35 @@ public class APITask1 extends TypiCodeTestBase {
         System.out.println(jsonPath.getString("email[2]"));
 
 
+        List<String> email2 = jsonPath.getList("email");
+
+
+    }
+
+    @Test
+    public void task5() {
+
+        //- Given accept type is Json
+        //- Query Param "postId" value is 1
+        //- When user sends request to  https://jsonplaceholder.typicode.com/comments
+        //- Then status code is 200
+        //
+        //- And header Content - Type is Json
+        //
+        //- And header "Connection" value is "keep-alive"
+        //- And json body contains "Lew@alysha.tv"
+
+        Response response = given().accept(ContentType.JSON)
+                .queryParam("postId", 1).
+                when().get("/comments");
+
+
+
+        assertEquals(200,response.getStatusCode());
+
+        assertEquals("keep-alive",response.getHeader("Connection"));
+
+        assertTrue(response.asString().contains("Lew@alysha.tv"));
 
     }
 }
