@@ -3,7 +3,7 @@ package com.cydeo.utils;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 
-public class HrApiTestBase {
+public abstract class HrApiTestBase {
 
     @BeforeAll
     public static void setUp() {
