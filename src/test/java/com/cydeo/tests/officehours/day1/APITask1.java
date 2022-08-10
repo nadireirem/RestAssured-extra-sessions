@@ -62,10 +62,23 @@ public class APITask1 extends TypiCodeTestBase {
         assertTrue(response.getHeaders().hasHeaderWithName("Date"));
 
         //- And header "X-Powered-By" value is "Express"
+        assertEquals("Express",response.getHeader("X-Powered-By"));
 
         //- And header "X-Ratelimit-Limit" value is 1000
+        assertEquals("1000",response.getHeader("X-Ratelimit-Limit"));
+
         //- And header "Age" value is more than 100
-        //
+        String age = response.getHeader("Age");
+        assertTrue(Integer.parseInt(age)>=100);
+
+        Integer ageWithValueOf = Integer.valueOf(response.getHeader("Age"));
+
+
         //- And header "NEL" value contains "success_fraction"
+        assertEquals("success_fraction",response.getHeader("NEL"));
+
+
+
+
     }
 }
