@@ -75,7 +75,7 @@ public class APITask1 extends TypiCodeTestBase {
 
 
         //- And header "NEL" value contains "success_fraction"
-        assertEquals("success_fraction",response.getHeader("NEL"));
+        assertTrue(response.getHeader("NEL").contains("success_fraction"));
 
 
 
