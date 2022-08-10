@@ -77,7 +77,26 @@ public class APITask1 extends TypiCodeTestBase {
         //- And header "NEL" value contains "success_fraction"
         assertTrue(response.getHeader("NEL").contains("success_fraction"));
 
+    }
 
+    @Test
+    public void task3() {
+
+        //- Given accept type is Json
+        //- Path param "id" value is 12345
+        //- When user sends request to  https://jsonplaceholder.typicode.com/posts/{id}
+        //- Then status code is 404
+        //
+        //- And json body contains "{}"
+
+        Response response = given().accept(ContentType.JSON)
+                .pathParam("id", 12345).
+                when().get("/posts/{id}");
+
+
+        assertEquals(404,response.getStatusCode());
+
+        assertEquals("{}",response.asString());
 
 
     }
