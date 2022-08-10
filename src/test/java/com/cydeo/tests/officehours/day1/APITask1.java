@@ -3,6 +3,7 @@ package com.cydeo.tests.officehours.day1;
 import com.cydeo.utils.TypiCodeTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.internal.common.assertion.Assertion;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
@@ -97,6 +98,57 @@ public class APITask1 extends TypiCodeTestBase {
         assertEquals(404,response.getStatusCode());
 
         assertEquals("{}",response.asString());
+
+
+    }
+
+
+    @Test
+    public void task4() {
+
+        //- Given accept type is Json
+        //- Path param "id" value is 2
+        //- When user sends request to  https://jsonplaceholder.typicode.com/posts/{id}/comments
+        //- Then status code is 200
+        //
+        //- And header Content - Type is Json
+        //- And json body contains "Presley.Mueller@myrl.com",  "Dallas@ole.me" , "Mallory_Kunze@marie.org"
+
+        Response response =
+                given().accept(ContentType.JSON)
+                    .pathParam("id", 2).
+                when().get("/posts/{id}/comments");
+
+        assertEquals(200,response.getStatusCode());
+
+        // Contains
+        assertTrue(response.asString().contains("Presley.Mueller@myrl.com"));
+        assertTrue(response.asString().contains("Dallas@ole.me"));
+        assertTrue(response.asString().contains("Mallory_Kunze@marie.org"));
+
+        // Response.path
+        // Presley
+        String email = response.path("[0].email");
+        System.out.println(email);
+
+        //Dallas
+        email = response.path("[1].email");
+        System.out.println(email);
+
+        //Mallory
+        email = response.path("[2].email");
+        System.out.println(email);
+
+
+        //JsonPath
+        JsonPath jsonPath = response.jsonPath();
+        System.out.println(jsonPath.getString("[0].email"));
+        System.out.println(jsonPath.getString("email[0]"));
+
+        System.out.println(jsonPath.getString("email[1]"));
+
+        System.out.println(jsonPath.getString("email[2]"));
+
 
 
     }
