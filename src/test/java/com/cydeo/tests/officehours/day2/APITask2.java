@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class APITask2 extends HrApiTestBase {
@@ -68,6 +69,7 @@ public class APITask2 extends HrApiTestBase {
                 when().get("/employees");
 
         response.prettyPrint();
+        System.out.println("response.getTime() = " + response.getTime());
 
         assertEquals(200,response.getStatusCode());
         assertEquals(ContentType.JSON.toString(),response.getContentType());
@@ -99,5 +101,54 @@ public class APITask2 extends HrApiTestBase {
         System.out.println(count);
         assertEquals(25,count);
 
+    }
+
+    @Test
+    public void task3() {
+
+        //Q3:
+        //- Given accept type is Json
+        //-Query param value q= region_id 3
+        //- When users sends request to /countries
+        //- Then status code is 200
+        //- And all regions_id is 3
+        //- And count is 6
+        //- And hasMore is false
+        //- And Country_name are;
+        //  Australia,China,India,Japan,Malaysia,Singapore
+
+        Response response = given().accept(ContentType.JSON)
+                .queryParam("q", "{\"region_id\":3}").
+                when().get("/countries").prettyPeek()
+                .then().statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("items.country_name",hasItems("Australia","China","India","Japan","Malaysia","Singapore"))
+                .body("items.country_name",containsInRelativeOrder("Australia","China","India","Japan","Malaysia","Singapore"))
+                .extract().response();
+
+        // response.prettyPrint();
+
+        //prettyPeek --> Returns RESPONSE and prints response into screen
+                         // It helps us to continue chaining as a response
+        //prettyPrint--> Returns STRING and prints response into screen
+
+        //- And all regions_id is 3
+        JsonPath jsonPath = response.jsonPath();
+        List<Integer> regionIDs = jsonPath.getList("items.region_id");
+
+        assertTrue(regionIDs.stream().allMatch(each->each==3));
+
+        //- And count is 6
+        int count = jsonPath.getInt("count");
+        System.out.println(count);
+        assertEquals(6,count);
+
+        //- And hasMore is false
+        assertFalse(jsonPath.getBoolean("hasMore"));
+
+        //- And Country_name are;
+        //  Australia,China,India,Japan,Malaysia,Singapore
+        List<String> countryNames = jsonPath.getList("items.country_name");
+        System.out.println("countryNames = " + countryNames);
     }
 }
