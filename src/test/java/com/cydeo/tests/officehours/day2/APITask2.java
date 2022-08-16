@@ -89,7 +89,15 @@ public class APITask2 extends HrApiTestBase {
         assertTrue(list.stream().allMatch(each->each.startsWith("SA")));
 
         //- And all department_ids are 80
+        System.out.println("=== DEPARTMENT IDS ===");
+        List<Integer> departmentIDs = jsonPath.getList("items.department_id");
+        System.out.println(departmentIDs);
+        assertTrue(departmentIDs.stream().allMatch(each->each==80));
+
         //- Count is 25
+        int count = jsonPath.getInt("count");
+        System.out.println(count);
+        assertEquals(25,count);
 
     }
 }
