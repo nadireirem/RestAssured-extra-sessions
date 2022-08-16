@@ -8,6 +8,9 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,6 +47,49 @@ public class APITask2 extends HrApiTestBase {
         assertEquals("United States of America",jsonPath.getString("country_name"));
         assertEquals(2,jsonPath.getInt("region_id"));
 
+
+    }
+
+    @Test
+    public void task2() {
+
+        //- Given accept type is Json
+        //- Query param value - q={"department_id":80}
+        //- When users sends request to /employees
+        //- Then status code is 200
+        //- And Content - Type is Json
+        //- And all job_ids start with 'SA'
+        //- And all department_ids are 80
+        //- Count is 25
+
+
+        Response response = given().accept(ContentType.JSON)
+                .queryParam("q", "{\"department_id\":80}").
+                when().get("/employees");
+
+        response.prettyPrint();
+
+        assertEquals(200,response.getStatusCode());
+        assertEquals(ContentType.JSON.toString(),response.getContentType());
+
+
+        JsonPath jsonPath = response.jsonPath();
+
+
+
+        //- And all job_ids start with 'SA'
+
+        //OPTION 1
+        List<String> list = jsonPath.getList("items.job_id");
+        System.out.println(list);
+        List<String> afterFilter = list.stream().filter(each -> each.startsWith("SA")).collect(Collectors.toList());
+        assertEquals(afterFilter.size(),list.size());
+
+        //OPTION 2
+        assertTrue(list.stream().allMatch(each->each.startsWith("SA")));
+
+        //- And all department_ids are 80
+        //- Count is 25
 
     }
 }

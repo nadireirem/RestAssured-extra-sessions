@@ -23,6 +23,7 @@ Q2:
 - And all job_ids start with 'SA'
 - And all department_ids are 80
 - Count is 25
+
 Q3:
 - Given accept type is Json
 -Query param value q= region_id 3
