@@ -48,7 +48,7 @@ public class APITask3 extends ZipCodeTestBase {
         System.out.println("==== RESPONSE AS ===");
         //OPTION 1 --> response as
         ZipInfo zipInfo = response.as(ZipInfo.class);
-
+        System.out.println(zipInfo);
 
 
         //And body should contains following information
@@ -69,6 +69,27 @@ public class APITask3 extends ZipCodeTestBase {
         assertEquals("38.8604",zipInfo.getPlaces().get(0).getLatitude());
 
 
+        System.out.println("==== JSONPATH GETOBJECT ===");
+        //OPTION 2 --> jsonpath
+
+        ZipInfo zipInfoJsonPath = response.jsonPath().getObject("", ZipInfo.class);
+        System.out.println(zipInfoJsonPath);
+        //And body should contains following information
+        //    post code is 22031
+        assertEquals("22031",zipInfoJsonPath.getPostCode());
+        //    country  is United States
+        assertEquals("United States",zipInfoJsonPath.getCountry());
+        //    country abbreviation is US
+        assertEquals("US",zipInfoJsonPath.getCountryAbbreviation());
+
+        //    place name is Fairfax
+        assertEquals("Fairfax",zipInfoJsonPath.getPlaces().get(0).getPlaceName());
+
+        //    state is Virginia
+        assertEquals("Virginia",zipInfoJsonPath.getPlaces().get(0).getState());
+
+        //    latitude is 38.8604
+        assertEquals("38.8604",zipInfoJsonPath.getPlaces().get(0).getLatitude());
 
     }
 }
