@@ -3,7 +3,7 @@ package com.cydeo.utils;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 
-public class ZipCodeTestBase {
+public abstract class ZipCodeTestBase {
 
     @BeforeAll
     public static void setUp(){
