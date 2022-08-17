@@ -1,10 +1,15 @@
 package com.cydeo.tests.officehours.day3;
 
 import com.cydeo.utils.ZipCodeTestBase;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
-public class APITask3 extends ZipCodeTestBase {
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 
+public class APITask3 extends ZipCodeTestBase {
 
     @Test
     public void task1() {
@@ -22,5 +27,12 @@ public class APITask3 extends ZipCodeTestBase {
         //    place name is Fairfax
         //    state is Virginia
         //    latitude is 38.8604
+
+
+    given().accept(ContentType.JSON)
+            .pathParam("postal-code",22031).
+            when().get("/us/{postal-code}").prettyPeek();
+
+
     }
 }
