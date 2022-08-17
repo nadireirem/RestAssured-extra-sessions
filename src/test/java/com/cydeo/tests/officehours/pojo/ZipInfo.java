@@ -10,9 +10,9 @@ public class ZipInfo {
     public String postCode;
 
     public String country;
-    @JsonProperty("country abbreviation")
+   // @JsonProperty("country abbreviation")
     public String countryAbbreviation;
 
 
-    public List<Place> places = null;
+    public List<Place> places;
 }

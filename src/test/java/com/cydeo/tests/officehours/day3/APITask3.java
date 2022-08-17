@@ -3,6 +3,7 @@ package com.cydeo.tests.officehours.day3;
 import com.cydeo.utils.ZipCodeTestBase;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
@@ -29,9 +30,22 @@ public class APITask3 extends ZipCodeTestBase {
         //    latitude is 38.8604
 
 
-    given().accept(ContentType.JSON)
-            .pathParam("postal-code",22031).
-            when().get("/us/{postal-code}").prettyPeek();
+        Response response = given().accept(ContentType.JSON)
+                .pathParam("postal-code", 22031).
+                when().get("/us/{postal-code}").prettyPeek();
+
+        //Then status code must be 200
+        assertEquals(200,response.statusCode());
+        //And content type must be application/json
+        assertEquals(ContentType.JSON.toString(),response.contentType());
+        //And Server header is cloudflare
+        assertEquals("cloudflare",response.getHeader("Server"));
+        //And Report-To header exists
+        assertFalse((response.getHeader("Report-To").isEmpty()));
+        assertTrue(response.getHeaders().hasHeaderWithName("Report-To"));
+
+
+
 
 
     }
