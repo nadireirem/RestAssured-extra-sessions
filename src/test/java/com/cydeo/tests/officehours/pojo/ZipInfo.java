@@ -1,18 +1,23 @@
 package com.cydeo.tests.officehours.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
-
+@Data
 public class ZipInfo {
 
     @JsonProperty("post code")
-    public String postCode;
+    private String postCode;
 
-    public String country;
-   // @JsonProperty("country abbreviation")
-    public String countryAbbreviation;
+    private String country;
+    @JsonProperty("country abbreviation")
+   private String countryAbbreviation;
 
 
-    public List<Place> places;
+    private List<Place> places;
+
 }

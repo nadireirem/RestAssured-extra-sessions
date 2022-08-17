@@ -1,5 +1,6 @@
 package com.cydeo.tests.officehours.day3;
 
+import com.cydeo.tests.officehours.pojo.ZipInfo;
 import com.cydeo.utils.ZipCodeTestBase;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -44,7 +45,28 @@ public class APITask3 extends ZipCodeTestBase {
         assertFalse((response.getHeader("Report-To").isEmpty()));
         assertTrue(response.getHeaders().hasHeaderWithName("Report-To"));
 
+        System.out.println("==== RESPONSE AS ===");
+        //OPTION 1 --> response as
+        ZipInfo zipInfo = response.as(ZipInfo.class);
 
+
+
+        //And body should contains following information
+        //    post code is 22031
+        assertEquals("22031",zipInfo.getPostCode());
+        //    country  is United States
+        assertEquals("United States",zipInfo.getCountry());
+        //    country abbreviation is US
+        assertEquals("US",zipInfo.getCountryAbbreviation());
+
+        //    place name is Fairfax
+        assertEquals("Fairfax",zipInfo.getPlaces().get(0).getPlaceName());
+
+        //    state is Virginia
+        assertEquals("Virginia",zipInfo.getPlaces().get(0).getState());
+
+        //    latitude is 38.8604
+        assertEquals("38.8604",zipInfo.getPlaces().get(0).getLatitude());
 
 
 

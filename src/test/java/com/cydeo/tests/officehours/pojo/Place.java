@@ -1,17 +1,19 @@
 package com.cydeo.tests.officehours.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 public class Place {
 
     @JsonProperty("place name")
-    public String placeName;
+    private String placeName;
 
-    public String longitude;
+    private String longitude;
 
-    public String state;
+    private String state;
     @JsonProperty("state abbreviation")
-    public String stateAbbreviation;
+    private String stateAbbreviation;
 
-    public String latitude;
+    private String latitude;
 }
