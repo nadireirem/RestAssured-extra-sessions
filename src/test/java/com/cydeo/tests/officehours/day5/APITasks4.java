@@ -1,7 +1,14 @@
 package com.cydeo.tests.officehours.day5;
 
 import com.cydeo.utils.HrApiTestBase;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,8 +31,45 @@ public class APITasks4 extends HrApiTestBase {
     // */
 
 
+    /**
+     * given accept is json
+     * When I send GET request to "/regions/100"
+     * Then status code is 200
+     * content type is json
+     * region_id is 100
+     * region_name is Test Region
+     */
+
     @Test
     public void task1() {
 
+
+        Map<String, Object> requestBody = new HashMap<>();
+
+        requestBody.put("region_id",12223);
+        requestBody.put("region_name","Test Region Officehours");
+
+        given().accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .body(requestBody).log().body()
+                .when().post("/regions/").prettyPeek()
+                .then().statusCode(201)
+                .contentType(ContentType.JSON)
+                .body("region_id", is(12223))
+                .body("region_name", is("Test Region Officehours"));
+
+
+
+        given().accept(ContentType.JSON)
+                .pathParam("region_id",12223)
+                .when().get("/regions/{region_id}").prettyPeek()
+                .then().statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("region_id", is(12223))
+                .body("region_name", is("Test Region Officehours"));
+
+
+
     }
+
 }
