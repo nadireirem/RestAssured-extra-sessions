@@ -16,7 +16,7 @@
 
 /**
  * given accept is json
- * When I send post request to "/regions/100"
+ * When I send GET request to "/regions/100"
  * Then status code is 200
  * content type is json
  * region_id is 100
