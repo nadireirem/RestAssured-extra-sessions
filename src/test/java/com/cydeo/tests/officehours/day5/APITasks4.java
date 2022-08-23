@@ -48,27 +48,32 @@ public class APITasks4 extends HrApiTestBase {
 
         requestBody.put("region_id",12223);
         requestBody.put("region_name","Test Region Officehours");
-
-        given().accept(ContentType.JSON)
+        //POST REGION
+        int regionID = given().accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
                 .body(requestBody).log().body()
                 .when().post("/regions/").prettyPeek()
                 .then().statusCode(201)
                 .contentType(ContentType.JSON)
                 .body("region_id", is(12223))
-                .body("region_name", is("Test Region Officehours"));
+                .body("region_name", is("Test Region Officehours"))
+                .extract().response().jsonPath().getInt("region_id");
 
-
-
+        //GET REGION
         given().accept(ContentType.JSON)
-                .pathParam("region_id",12223)
+                .pathParam("region_id",regionID)
                 .when().get("/regions/{region_id}").prettyPeek()
                 .then().statusCode(200)
                 .contentType(ContentType.JSON)
-                .body("region_id", is(12223))
+                .body("region_id", is(regionID))
                 .body("region_name", is("Test Region Officehours"));
 
-
+        // DELETE REGION
+        given().accept(ContentType.JSON)
+                .pathParam("region_id",regionID)
+                .when().delete("/regions/").prettyPeek()
+                .then().statusCode(200)
+                .body("rowsDeleted",is(1));
 
     }
 
