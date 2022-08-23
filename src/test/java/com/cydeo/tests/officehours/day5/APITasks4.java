@@ -71,7 +71,7 @@ public class APITasks4 extends HrApiTestBase {
         // DELETE REGION
         given().accept(ContentType.JSON)
                 .pathParam("region_id",regionID)
-                .when().delete("/regions/").prettyPeek()
+                .when().delete("/regions/{region_id}").prettyPeek()
                 .then().statusCode(200)
                 .body("rowsDeleted",is(1));
 
