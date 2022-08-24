@@ -1,5 +1,6 @@
 package com.cydeo.tests.officehours.day5;
 
+import com.cydeo.tests.officehours.pojo.POSTRegion;
 import com.cydeo.utils.HrApiTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -100,6 +101,34 @@ public class APITasks4 extends HrApiTestBase {
     //*/
     @Test
     public void task2() {
+
+        POSTRegion region = new POSTRegion(2198, "Intellij Region");
+
+        //PUT Region
+        int regionID = given().accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .pathParam("region_id", 2198)
+                .body(region)
+                .when().put("/regions/{region_id}").prettyPeek()
+                .then().statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("region_id", is(2198))
+                .body("region_name", is("Intellij Region"))
+                .extract().jsonPath().getInt("region_id");
+
+        System.out.println("REGION ID FROM PUT ");
+        System.out.println(regionID);
+
+        //DELETE same REGION
+        given().accept(ContentType.JSON)
+                .pathParam("region_id",regionID)
+                .when().delete("/regions/{region_id}")
+                .then().statusCode(200)
+                .body("rowsDeleted",is(1));
+
+
+
+
 
     }
 }
