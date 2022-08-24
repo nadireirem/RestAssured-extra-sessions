@@ -127,8 +127,5 @@ public class APITasks4 extends HrApiTestBase {
                 .body("rowsDeleted",is(1));
 
 
-
-
-
     }
 }
