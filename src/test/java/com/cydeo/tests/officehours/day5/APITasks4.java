@@ -77,4 +77,29 @@ public class APITasks4 extends HrApiTestBase {
 
     }
 
+    //2) PUT request then DELETE
+    ///**
+    // * Given accept type is Json
+    // * And content type is json
+    // * When i send PUT request to /regions/100
+    // * With json body:
+    // *    {
+    // *      "region_id": 100,
+    // *      "region_name": "Wooden Region"
+    // *    }
+    // * Then status code is 200
+    // * And content type is json
+    // * region_id is 100
+    // * region_name is Wooden Region
+    //*/
+    //
+    ///**
+    // * Given accept type is Json
+    // * When i send DELETE request to /regions/100
+    // * Then status code is 200
+    //*/
+    @Test
+    public void task2() {
+
+    }
 }
