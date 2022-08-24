@@ -22,3 +22,52 @@
  * region_id is 100
  * region_name is Test Region
  */
+
+ ================
+2) PUT request then DELETE
+/**
+ * Given accept type is Json
+ * And content type is json
+ * When i send PUT request to /regions/100
+ * With json body:
+ *    {
+ *      "region_id": 100,
+ *      "region_name": "Wooden Region"
+ *    }
+ * Then status code is 200
+ * And content type is json
+ * region_id is 100
+ * region_name is Wooden Region
+*/
+
+/**
+ * Given accept type is Json
+ * When i send DELETE request to /regions/100
+ * Then status code is 200
+*/
+=====================================================
+
+
+3) POST a region then Database validations. Please use Map
+/**
+ * given accept is json
+ * and content type is json
+ * When I send post request to "/regions/"
+ * With json:
+ * {
+ * "region_id":200,
+ * "region_name":"Test Region"
+ * }
+ * Then status code is 201
+ * content type is json
+ * When I connect to HR database and execute query "SELECT region_id, region_name FROM regions WHERE region_id = 200"
+ * Theen region_name from database should match region_name from POST request
+
+ */
+
+
+/**
+* Given accept type is Json
+* When i send DELETE request to /regions/200
+* Then status code is 200
+*/
