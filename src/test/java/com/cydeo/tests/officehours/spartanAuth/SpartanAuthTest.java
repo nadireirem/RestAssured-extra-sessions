@@ -24,4 +24,15 @@ public class SpartanAuthTest  extends SpartanSecureTestBase {
                 .then().log().ifValidationFails()
                 .statusCode(200);
     }
+
+
+    @Test
+    public void testEditorDELETE() {
+        given().accept(ContentType.JSON)
+                .pathParam("id",1412)
+                .auth().basic("editor","editor")
+                .delete("/spartans/{id}").prettyPeek()
+                .then().log().ifValidationFails()
+                .statusCode(403);
+    }
 }
