@@ -63,4 +63,19 @@ public class SpartanAuthTest  extends SpartanSecureTestBase {
               .statusCode(200);
 
     }
+
+    @ParameterizedTest
+    @CsvFileSource(resources ="/DELETESpartans.csv" ,numLinesToSkip = 1)
+    public void DELETESpartanTest(String username,String password,int id, int statusCode) {
+
+        given().accept(ContentType.JSON)
+                .pathParam("id",id)
+                .auth().basic(username,password)
+                .delete("/spartans/{id}").prettyPeek()
+                .then().log().ifValidationFails()
+                .statusCode(statusCode);
+
+    }
+
+
 }

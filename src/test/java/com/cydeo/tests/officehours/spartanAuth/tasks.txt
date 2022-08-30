@@ -13,3 +13,21 @@
     - Test All Users --> GET All Spartans  (CSVFileSource)
     - Test All Users --> DELETE  Spartan   (CSVFileSource)
 
+            admin --> YES --> 204
+            user ---> NO --> 403
+            editor -->NO --> 403
+
+
+     OPTION 1
+
+        - Create different class to do RBAC
+
+                AdminAuthTest
+                UserAuthTest
+                EditorAuthTest
+
+     OPTION 2
+
+        - Create DDT Test with @ParametrizedTest
+        - Use CSV File Source
+
