@@ -3,6 +3,8 @@ package com.cydeo.tests.officehours.spartanAuth;
 import com.cydeo.utils.SpartanSecureTestBase;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,5 +36,18 @@ public class SpartanAuthTest  extends SpartanSecureTestBase {
                 .delete("/spartans/{id}").prettyPeek()
                 .then().log().ifValidationFails()
                 .statusCode(403);
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(strings = {"admin","editor","user"})
+    void testAllUsersGET(String role ) {
+
+        given().accept(ContentType.JSON)
+                .auth().basic(role,role)
+                .get("/spartans").prettyPeek()
+                .then().log().ifValidationFails()
+                .statusCode(200);
+
     }
 }
