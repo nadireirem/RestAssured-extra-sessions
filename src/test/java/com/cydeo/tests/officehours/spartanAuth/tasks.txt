@@ -1,0 +1,15 @@
+
+--- SPARTAN AUTH TASKS ---
+
+- Test Public User
+- Test Aunthenticated User
+- Role Based Access Control Test --> RBAC
+       * admin :  create , read , update , delete
+       * editor:  create , read , update
+       * user  :  read
+
+    - Editor Should not be able to delete
+    - Test All Users --> GET All Spartans  (ValueSource)
+    - Test All Users --> GET All Spartans  (CSVFileSource)
+    - Test All Users --> DELETE  Spartan   (CSVFileSource)
+

@@ -1,15 +1,12 @@
-package com.cydeo.tests.officehours.day3;
+package com.cydeo.tests.officehours.task3;
 
 import com.cydeo.tests.officehours.pojo.StateCity;
 import com.cydeo.tests.officehours.pojo.StateCityPlaces;
 import com.cydeo.tests.officehours.pojo.ZipInfo;
 import com.cydeo.utils.ZipCodeTestBase;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
-import lombok.Data;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class APITask3 extends ZipCodeTestBase {

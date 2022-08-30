@@ -1,4 +1,4 @@
-package com.cydeo.tests.officehours.day5;
+package com.cydeo.tests.officehours.task4;
 
 import com.cydeo.tests.officehours.pojo.POSTRegion;
 import com.cydeo.utils.HrApiTestBase;

@@ -1,11 +1,9 @@
-package com.cydeo.tests.officehours.day2;
+package com.cydeo.tests.officehours.task2;
 
 import com.cydeo.utils.HrApiTestBase;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

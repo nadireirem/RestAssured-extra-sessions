@@ -1,8 +1,7 @@
-package com.cydeo.tests.officehours.day1;
+package com.cydeo.tests.officehours.task1;
 
 import com.cydeo.utils.TypiCodeTestBase;
 import io.restassured.http.ContentType;
-import io.restassured.internal.common.assertion.Assertion;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;

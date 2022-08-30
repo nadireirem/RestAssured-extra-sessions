@@ -1,10 +1,8 @@
-package com.cydeo.tests.officehours.day5;
+package com.cydeo.tests.officehours.task4;
 
 import com.cydeo.tests.officehours.pojo.POSTRegion;
 import com.cydeo.utils.HrApiTestBase;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -12,7 +10,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
+
 public class APITasks4 extends HrApiTestBase {
 
     //1) POST a region then do validations. Please use Map or POJO class, or JsonPath
