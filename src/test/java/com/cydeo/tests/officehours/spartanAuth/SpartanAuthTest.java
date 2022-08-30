@@ -4,6 +4,7 @@ import com.cydeo.utils.SpartanSecureTestBase;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static io.restassured.RestAssured.*;
@@ -48,6 +49,18 @@ public class SpartanAuthTest  extends SpartanSecureTestBase {
                 .get("/spartans").prettyPeek()
                 .then().log().ifValidationFails()
                 .statusCode(200);
+
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources ="/GETSpartans.csv" ,numLinesToSkip = 1)
+    public void testAllUsersCSVFile(String username,String password) {
+
+      given().accept(ContentType.JSON)
+              .auth().basic(username,password)
+              .get("/spartans").prettyPeek()
+              .then().log().ifValidationFails()
+              .statusCode(200);
 
     }
 }
