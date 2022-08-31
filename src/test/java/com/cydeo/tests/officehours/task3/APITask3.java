@@ -187,7 +187,6 @@ And payload should contain following information
         StateCity stateCity = response.as(StateCity.class);
 
         assertEquals("US" , stateCity.getCountryAbbreviation());
-        assertEquals("United States" , stateCity.getCountry());
         assertEquals("Fairfax", stateCity.getPlaceName());
 
     List<StateCityPlaces> places = stateCity.getPlaces();
