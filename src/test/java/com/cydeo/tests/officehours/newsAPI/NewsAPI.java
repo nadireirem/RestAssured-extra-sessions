@@ -19,7 +19,7 @@ public class NewsAPI extends NewsAPITestBase {
     }
 
     @Test
-    public void headerAuth() {
+    public void headerXApiKey() {
 
         given().accept(ContentType.JSON)
                 .queryParam("q","bitcoin")
@@ -28,6 +28,21 @@ public class NewsAPI extends NewsAPITestBase {
                 .then().statusCode(200);
 
     }
+
+    @Test
+    public void headerAuthorization() {
+
+        given().accept(ContentType.JSON)
+                .queryParam("q","bitcoin")
+                .header("Authorization","d5725fa0694b4a6c840333fd8cb1515b")
+                .get("/everything").prettyPeek()
+                .then().statusCode(200);
+
+    }
+
+
+
+
 
 
 }
